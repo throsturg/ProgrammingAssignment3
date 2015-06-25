@@ -15,6 +15,6 @@ best <- function(state, outcome) {
   }
   
   ## Return hospital name in that state with lowest 30-day death rate
-  
-  return(validState)
+  sapply(data[data$State==state,c(2,outcome.lookup[outcome])], min, na.rm=TRUE)[[1]]
+
 }
