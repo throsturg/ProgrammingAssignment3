@@ -2,6 +2,8 @@ best <- function(state, outcome) {
   ## Read outcome data
   data <- read.csv("outcome-of-care-measures.csv", colClass="character")
   outcome.lookup <- c("heart attack"=11,"heart failure"=17, "pneumonia"=23)
+  outcome.index <- outcome.lookup[outcome]
+  ## data[,11] <- as.numeric(data[,outcome.index])
   
   ## Check that state and outcome are valid
   validState <- state %in% data[,7]
@@ -15,6 +17,6 @@ best <- function(state, outcome) {
   }
   
   ## Return hospital name in that state with lowest 30-day death rate
-  sapply(data[data$State==state,c(2,outcome.lookup[outcome])], min, na.rm=TRUE)[[1]]
+  sapply(data[data$State==state,c(2, outcome.index)], min, na.rm=TRUE)[[1]]
 
 }
